@@ -37,8 +37,8 @@
 
 | 구분 | 기술 |
 |------|------|
-| 프론트엔드 | React.js, Axios, WebSocket |
-| 백엔드 | Spring Boot, Lombok, Spring WebSocket |
+| 프론트엔드 | React.js, Axios, Stomp |
+| 백엔드 | Spring Boot, Lombok |
 | AI 연동 | OpenAI GPT 3.5 API |
 | DB | MySQL |
 | 통신 | REST API + WebSocket |
