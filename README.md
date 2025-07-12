@@ -55,7 +55,7 @@
 | userName | String | 사용자의 이름 |
 | aiName | String | AI 챗봇 이름 |
 | topic | String | 챗봇 분야 |
-| createdAt | Timestamp | 생성 시간 |
+| createdAt | LocalDateTime | 생성 시간 |
 
 ### 🔸 ChatMessage 테이블
 | 필드명 | 타입 | 설명 |
@@ -64,7 +64,7 @@
 | chatRoomId | Long | 채팅방 ID (FK) |
 | sender | String | 보낸 사람 (user / ai) |
 | content | String | 메시지 내용 |
-| timestamp | Timestamp | 보낸 시간 |
+| timestamp | LocalDateTime | 보낸 시간 |
 
 ---
 
@@ -89,11 +89,10 @@
 
 ## 🏁 실행 방법
 
-bash
-# 백엔드 서버 실행
+### 백엔드 서버 실행
 ./gradlew bootRun
 
-# 프론트엔드 실행
+### 프론트엔드 실행
 cd frontend
 npm install
 npm start
