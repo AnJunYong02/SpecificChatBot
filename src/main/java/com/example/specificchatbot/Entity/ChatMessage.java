@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Builder
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessage {
@@ -16,13 +14,14 @@ public class ChatMessage {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "chat_room_id", nullable = false)
+    @Getter @Setter
     private ChatRoom chatRoom;
 
-    private String sender; // "user" or "ai"
-    private String content;
-    private LocalDateTime createdAt;
+    @Getter @Setter private String sender; // "user" or "ai"
+    @Getter @Setter private String content;
+    @Getter @Setter private LocalDateTime createdAt;
 
     @PrePersist
     public void setCreatedAt() {

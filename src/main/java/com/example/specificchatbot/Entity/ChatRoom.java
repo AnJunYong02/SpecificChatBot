@@ -6,21 +6,19 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatRoom {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String roomName;
-    private String userName;
-    private String aiName;
-    private String topic;
-    private LocalDateTime createdAt;
+    @Getter @Setter private String roomName;
+    @Getter @Setter private String userName;
+    @Getter @Setter private String aiName;
+    @Getter @Setter private String topic;
+    @Getter @Setter private LocalDateTime createdAt;
 
     @PrePersist
     public void setCreatedAt() {
