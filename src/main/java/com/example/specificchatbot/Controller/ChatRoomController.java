@@ -3,6 +3,7 @@ package com.example.specificchatbot.Controller;
 import com.example.specificchatbot.Entity.ChatRoom;
 import com.example.specificchatbot.Service.ChatRoomService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +16,9 @@ public class ChatRoomController {
 
     //채팅방 생성
     @PostMapping()
-    public ChatRoom createChatRoom(@RequestBody ChatRoom chatRoom) {
-        return chatRoomService.createChatRoom(chatRoom);
+    public ResponseEntity<ChatRoom> createChatRoom(@RequestBody ChatRoom chatRoom) {
+        ChatRoom createRoom = chatRoomService.createChatRoom(chatRoom);
+        return ResponseEntity.ok(createRoom);
     }
 
     //채팅방 하나 불러오기
@@ -33,8 +35,9 @@ public class ChatRoomController {
 
     //채팅방 수정
     @PutMapping("/{id}")
-    public ChatRoom updateChatRoom(@PathVariable Long id, @RequestBody ChatRoom updatedChatRoom) {
-        return chatRoomService.updateChatRoom(id, updatedChatRoom);
+    public ResponseEntity<ChatRoom> updateChatRoom(@PathVariable Long id, @RequestBody ChatRoom updatedChatRoom) {
+        ChatRoom updateRoom = chatRoomService.updateChatRoom(id, updatedChatRoom);
+        return ResponseEntity.ok(updateRoom);
     }
 
     //채팅방 삭제

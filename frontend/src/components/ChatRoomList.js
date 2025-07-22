@@ -1,4 +1,3 @@
-// components/ChatRoomList.js
 import React, { useEffect, useState } from 'react';
 import { fetchChatRooms, deleteChatRoom } from '../api/chatApi';
 import { useNavigate } from 'react-router-dom';
@@ -8,10 +7,15 @@ const ChatRoomList = () => {
     const navigate = useNavigate();
 
     const loadRooms = () => {
-        fetchChatRooms().then(res => setRooms(res.data));
+        fetchChatRooms().then(res => {
+            console.log("✅ fetch 응답 데이터:", res.data);  // 🔍 여기에 room.id가 존재하는지 확인
+            setRooms(res.data);
+        });
     };
 
+
     const handleDelete = (id) => {
+        console.log("삭제 요청 아이디 : ", id);
         if (window.confirm('정말 삭제하시겠습니까?')) {
             deleteChatRoom(id).then(() => loadRooms());
         }
@@ -37,10 +41,16 @@ const ChatRoomList = () => {
             <ul className="space-y-4">
                 {rooms.map(room => (
                     <li key={room.id} className="p-4 border rounded flex justify-between items-center">
-                        <div onClick={() => navigate(`/chat/${room.id}`)} className="cursor-pointer">
+                        <div>
                             <strong>{room.roomName}</strong> (AI: {room.aiName})
                         </div>
                         <div className="space-x-2">
+                            <button
+                                onClick={() => navigate(`/chat/${room.id}`)}
+                                className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
+                            >
+                                입장
+                            </button>
                             <button
                                 onClick={() => handleEdit(room.id)}
                                 className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
@@ -57,6 +67,7 @@ const ChatRoomList = () => {
                     </li>
                 ))}
             </ul>
+
         </div>
     );
 };

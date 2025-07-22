@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatRoom {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter @Setter private String roomName;
@@ -23,5 +24,9 @@ public class ChatRoom {
     @PrePersist
     public void setCreatedAt() {
         this.createdAt = LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return id;
     }
 }

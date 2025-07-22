@@ -20,7 +20,10 @@ const ChatRoomForm = ({ isEdit = false }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const action = isEdit ? updateChatRoom(id, form) : createChatRoom(form);
+        const action = isEdit ? updateChatRoom(id, form) : createChatRoom(form).then(res => {
+            console.log(res);
+            navigate(`/chat/${res.data.id}`);
+        });
         action.then(() => navigate('/'));
     };
 
