@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { getChatRoom } from '../api/chatApi';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 let stompClient = null;
 
@@ -12,18 +12,33 @@ const ChatMessage = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const messagesEndRef = useRef(null);
+    const navigate = useNavigate();
 
     const connect = () => {
         const socket = new SockJS('http://localhost:8080/ws');
         const client = new Client({
             webSocketFactory: () => socket,
             onConnect: () => {
+                // 1. 실시간 메시지 구독
                 client.subscribe(`/topic/chat/${id}`, (msg) => {
                     const message = JSON.parse(msg.body);
                     setMessages((prev) => [...prev, message]);
                 });
+
+                // 2. 과거 메시지 구독
+                client.subscribe(`/topic/history/${id}`, (msg) => {
+                    const historyList = JSON.parse(msg.body);
+                    setMessages(historyList);
+                });
+
+                // 3. 입장 메시지 전송
+                client.publish({
+                    destination: `/app/chat.enter`,
+                    body: JSON.stringify({ roomId: id }),
+                });
             },
         });
+
         client.activate();
         stompClient = client;
     };
@@ -57,10 +72,20 @@ const ChatMessage = () => {
 
     return (
         <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+            {/* 뒤로가기 버튼 */}
+            <button
+                onClick={() => navigate('/')}
+                className="mb-4 text-sm text-blue-500 hover:underline"
+            >
+                ← 뒤로가기
+            </button>
+
+            {/* 채팅방 제목 */}
             <h2 className="text-xl font-semibold mb-4 text-center text-blue-600">
                 {room.roomName} <span className="text-gray-500">with {room.aiName}</span>
             </h2>
 
+            {/* 메시지 출력 영역 */}
             <div className="border rounded h-80 overflow-y-scroll p-4 bg-gray-50 space-y-2">
                 {messages.map((msg, i) => (
                     <div key={i} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -81,6 +106,7 @@ const ChatMessage = () => {
                 <div ref={messagesEndRef} />
             </div>
 
+            {/* 입력창 및 전송 버튼 */}
             <div className="mt-4 flex gap-2">
                 <input
                     type="text"
