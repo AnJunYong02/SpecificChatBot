@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: . #현재 폴더(.)에서 Dockerfile을 찾음
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment: # Springboot의 실행파일을 prod로 지정
+      - SPRING_PROFILES_ACTIVE=prod
+    networks: # frontend와 같은 네트워크와 연결하여 통신 가능하게 하기 위함
+      - app-network
+    restart: always
+#    env_file:
+#      - .env
+#    volumes:
+#      - .:/app
+#    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on: #backend가 실행된 후에 frontend가 실행되도록 함
+      - backend
+    restart: always
+    #    volumes:
+    #      - ./frontend:/app
+    #    stdin_open: true
+    #    tty: true
+    #    restart: unless-stopped
+
+networks:
+  app-network:
