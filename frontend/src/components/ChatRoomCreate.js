@@ -31,6 +31,7 @@ const ChatRoomCreate = () => {
                 <option value="트럼프 대통령">트럼프 대통령</option>
                 <option value="젠슨 황">젠슨 황</option>
                 <option value="손흥민">손흥민</option>
+                <option value="김연아">김연아</option>
                 <option value="연인">연인</option>
                 <option value="국회의원">국회의원</option>
                 <option value="치킨집 사장님">치킨집 사장님</option>
