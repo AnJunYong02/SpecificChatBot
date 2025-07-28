@@ -1,7 +1,0 @@
-# 루트 디렉토리 기준
-.gradle/
-build/
-**/*.iml
-.vscode/
-.idea/
-*.log
