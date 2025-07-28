@@ -4,8 +4,38 @@
 사용자는 원하는 분야의 챗봇을 선택해 채팅방을 만들고, WebSocket을 통해 실시간으로 대화할 수 있습니다.
 
 ---
+## 🧠 챗봇 채팅방 시스템
+
+### 💬 채팅방 추가
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0b4f3d37-9cfa-470e-bc71-ea0fdd26683c" alt="ChatBot UI - Group 1" width="300"/>
+  <img src="https://github.com/user-attachments/assets/80451d11-75e6-48f9-92e4-b213de28f354" alt="ChatBot UI - Group 2" width="300"/>
+</p>
+
+---
+
+### 🖥️ 채팅방 목록
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c0d2a29a-3bf2-44d2-82ac-04d093d8c9ac" alt="ChatRoom List Page" width="800"/>
+</p>
+
+---
+
+### 🗨️ 채팅 내용
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/146718c2-abad-43e5-ac09-3192e8ab1239" alt="Chat Detail Page" width="400"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/14306af0-ca4a-48d5-97d8-68bd0760a59f" alt="Chat History Page" width="400"/>
+</p>
+
+---
 
 ## 📌 주요 기능
+
 
 ### 🔹 채팅방 기능 (CRUD)
 - 채팅방 생성: 사용자가 직접 생성 (채팅방 이름, 사용자 이름, 챗봇 이름, 분야 선택)
@@ -73,13 +103,13 @@
 
 1. env 파일 생성
 2. 빌드 및 실행
-docker-compose up --build
+   docker-compose up --build
 3. 중지
-docker-compose down
+   docker-compose down
 
 #### docker-compose로 오류 발생시 따로 실행 방법
 1. 백엔드 서버 실행<br>
-./gradlew bootRun
+   ./gradlew bootRun
 
 2. 프론트엔드 실행<br>
-cd frontend<br> npm install <br> npm start
+   cd frontend<br> npm install <br> npm start
