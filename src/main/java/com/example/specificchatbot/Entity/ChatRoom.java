@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatRoom {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +23,11 @@ public class ChatRoom {
     @Getter @Setter private String aiName;
     @Getter @Setter private String topic;
     @Getter @Setter private LocalDateTime createdAt;
+    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChatMessage> chatMessages = new ArrayList<>();
 
     @PrePersist
     public void setCreatedAt() {
         this.createdAt = LocalDateTime.now();
-    }
-
-    public Long getId() {
-        return id;
     }
 }
