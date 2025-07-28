@@ -1,9 +1,11 @@
 package com.example.specificchatbot.Service;
 
 import com.example.specificchatbot.Entity.ChatRoom;
+import com.example.specificchatbot.Repository.ChatMessageRepository;
 import com.example.specificchatbot.Repository.ChatRoomRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class ChatRoomService {
     }
 
     //채팅방 삭제
+    @Transactional
     public void deleteChatRoom(Long id){
         chatRoomRepository.deleteById(id);
     }
